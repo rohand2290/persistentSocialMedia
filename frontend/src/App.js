@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends React.Component {
   state = {};
 
-  componentWillMount() {
+  checkStatus = () => {
     axios
       .get(`/api/getLoginbyId/${localStorage.getItem("id")}`)
       .then((response) => {
@@ -43,6 +43,9 @@ class App extends React.Component {
           });
         }
       });
+  };
+  componentDidMount() {
+    setInterval(this.checkStatus, 1000);
   }
   render() {
     return (
