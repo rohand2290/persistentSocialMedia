@@ -66,7 +66,7 @@ class App extends React.Component {
       <div>
         <HashRouter>
           <Navbar bg="light">
-            <Navbar.Brand href="/">Demo</Navbar.Brand>
+            <Navbar.Brand href="/">Ikobi</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               {this.state.navComponent}
