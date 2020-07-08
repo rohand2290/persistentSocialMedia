@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-
+import { Container, Form, Button } from "react-bootstrap";
 class NewPost extends React.Component {
   state = {};
   handleSubmit = () => {
@@ -20,12 +20,30 @@ class NewPost extends React.Component {
     }
     return (
       <div>
-        <h1>Create a new post</h1>
-        <form onSubmit={this.handleSubmit} className="newPostForm">
-          <input placeholder="Enter title of post" id="postTitle" />
-          <input placeholder="Enter content" id="postContent" />
-          <button type="submit">Submit</button>
-        </form>
+        <Container>
+          <h1>Create a new post</h1>
+          <form onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                id="postTitle"
+                placeholder="Enter title"
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Content</Form.Label>
+              <Form.Control
+                type="text"
+                id="postContent"
+                placeholder="Enter content"
+              ></Form.Control>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Create New Post
+            </Button>
+          </form>
+        </Container>
       </div>
     );
   }

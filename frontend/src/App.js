@@ -6,13 +6,17 @@ import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Post from "./Post";
 import NewPost from "./NewPost";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   state = {};
 
+  logout = () => {
+    localStorage.clear();
+    window.location.reload(false);
+  };
   checkStatus = () => {
     axios
       .get(`/api/getLoginbyId/${localStorage.getItem("id")}`)
@@ -38,7 +42,17 @@ class App extends React.Component {
         } else {
           this.setState({
             navComponent: (
-              <Navbar.Text>{`Logged in as ${response.data.username}`}</Navbar.Text>
+              <div>
+                <Nav>
+                  <Nav.Link
+                    as={Link}
+                    to="/dashboard"
+                  >{`Logged in as ${response.data.username}`}</Nav.Link>
+                  <Button variant="outline-success" onClick={this.logout}>
+                    Logout
+                  </Button>
+                </Nav>
+              </div>
             ),
           });
         }

@@ -21,7 +21,7 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <Container fluid>
+      <Container>
         <div>
           <h1>Posts</h1>
           <div id="posts">{this.state.posts}</div>

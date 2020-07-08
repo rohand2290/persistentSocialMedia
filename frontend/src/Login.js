@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Container, Form, Button } from "react-bootstrap";
 class Login extends React.Component {
   state = {};
 
@@ -12,10 +13,14 @@ class Login extends React.Component {
         password: document.getElementById("password").value,
       })
       .then((response) => {
-        console.log(response.data);
-        localStorage.setItem("id", response.data.id);
-        localStorage.setItem("username", response.data.username);
-        this.setState({ redirect: "/dashboard" });
+        if (response.data !== "") {
+          console.log(response.data);
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("username", response.data.username);
+          this.setState({ redirect: "/dashboard" });
+        } else {
+          window.location.reload();
+        }
       });
   };
   render() {
@@ -24,12 +29,27 @@ class Login extends React.Component {
     }
     return (
       <div>
-        <h1>Login</h1>
-        <form className="loginform" onSubmit={this.handleSubmit}>
-          <input id="username" placeholder="Username"></input>
-          <input id="password" placeholder="Password"></input>
-          <button type="submit">Login</button>
-        </form>
+        <br />
+        <Container>
+          <h1>Login</h1>
+          <form onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Username" id="username" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                id="password"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+          </form>
+        </Container>
       </div>
     );
   }

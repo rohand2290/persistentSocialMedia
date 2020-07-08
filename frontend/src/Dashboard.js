@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { Container } from "react-bootstrap";
+
 class Dashboard extends React.Component {
   state = {};
   componentWillMount() {
@@ -8,17 +10,27 @@ class Dashboard extends React.Component {
       .get(`/api/getLoginbyId/${localStorage.getItem("id")}`)
       .then((response) => {
         console.log(response.data);
-        this.setState({ name: response.data.username });
+        if (response.data === "") {
+          this.setState({ redirect: "/" });
+        } else {
+          this.setState({ name: response.data.username });
+        }
       });
   }
 
   render() {
-    return (
-      <div>
-        <h1>{`Welcome, ${this.state.name}`}</h1>
-        <Link to="/newPost">Make a new post</Link>
-      </div>
-    );
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    } else {
+      return (
+        <div>
+          <Container>
+            <h1>{`Welcome, ${this.state.name}`}</h1>
+            <Link to="/newPost">Make a new post</Link>
+          </Container>
+        </div>
+      );
+    }
   }
 }
 

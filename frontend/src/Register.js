@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { Container, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 class Register extends React.Component {
   state = {};
@@ -23,12 +23,27 @@ class Register extends React.Component {
     }
     return (
       <div>
-        <h1>Register</h1>
-        <form className="registerform" onSubmit={this.handleSubmit}>
-          <input id="username" placeholder="Username"></input>
-          <input id="password" placeholder="Password"></input>
-          <button type="submit">Register</button>
-        </form>
+        <br />
+        <Container>
+          <h1>Register</h1>
+          <form onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Username" id="username" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                id="password"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Register
+            </Button>
+          </form>
+        </Container>
       </div>
     );
   }
